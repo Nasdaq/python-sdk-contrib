@@ -100,6 +100,7 @@ class Config:
         cert_path: typing.Optional[str] = None,
         default_authority: typing.Optional[str] = None,
         channel_credentials: typing.Optional[grpc.ChannelCredentials] = None,
+        call_credentials: typing.Optional[grpc.CallCredentials] = None,
         sync_metadata_disabled: typing.Optional[bool] = None,
     ):
         self.host = env_or_default(ENV_VAR_HOST, DEFAULT_HOST) if host is None else host
@@ -249,6 +250,7 @@ class Config:
         )
 
         self.channel_credentials = channel_credentials
+        self.call_credentials = call_credentials
 
         # TODO: remove the metadata call entirely after https://github.com/open-feature/flagd/issues/1584
         # This is a temporary stop-gap solutions to support servers that don't implement sync.GetMetadata

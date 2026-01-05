@@ -127,6 +127,11 @@ class GrpcResolver:
                 with open(config.cert_path, "rb") as f:
                     credentials = grpc.ssl_channel_credentials(f.read())
 
+            if config.call_credentials:
+                credentials = grpc.composite_channel_credentials(
+                    credentials, config.call_credentials
+                )
+
             channel = grpc.secure_channel(
                 target,
                 credentials=credentials,
